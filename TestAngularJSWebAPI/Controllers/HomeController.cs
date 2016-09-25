@@ -9,7 +9,7 @@ namespace TestAngularJSWebAPI.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index( )
         {
             string[] drives = Directory.GetLogicalDrives();//загруска лок дисков
 
