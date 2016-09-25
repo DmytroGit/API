@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        #namesContainer {
+            width: 300px;
+            float: left;
+        }
+
+        #formContainer {
+            float: left;
+            margin-top: 15px;
+        }
+
+        #receivedElement {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+
+    @*Обработчики элементов управленяи находястся в файле getName.js*@
+    <div id="namesContainer">
+        <ul id="names"></ul>
+    </div>
+
+    <div id="formContainer">
+        <div>
+            <input type="text" id="elementId" />
+            <button id="button">Получить имя</button>
+        </div>
+        <div id="receivedElement"></div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/MyJavaScript.js"></script>
+
+</body>
+</html>

@@ -1,45 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace WebAPI.Controllers.WebAPI
 {
     public class DataController : ApiController
     {
-        //запрос api/Data           //json / xml
-        public DateTime Get()
+        //возвращает все локальные диски
+        // GET api/name
+        public IEnumerable<string> Get()
         {
-            return DateTime.Now;
+            //загруска лок дисков
+            return Directory.GetLogicalDrives();
+        }
+        
+
+        //возвращает папки и файлы
+        public HttpResponseMessage Get(int id)
+        {
+            //загруска лок дисков
+            var localDisc = Directory.GetLogicalDrives();
+
+            if (id < localDisc.Length)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, localDisc[id]);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Item not found"); //Status code 404
+            }
         }
     }
 }
-/* // GET: api/Default
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Default/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Default
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Default/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Default/5
-        public void Delete(int id)
-        {
-        }
-*/

@@ -1,13 +1,55 @@
-﻿@model IEnumerable<string>
+﻿@model string[]
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "QueryInformation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
+<br />
 
-<h2>Index</h2>
+@* Таблица количества / размера ----------------------------------------- *@
 
-@foreach (var item in Model)
-{
-    <a href="/Home/QueryInformation?message=@item">@item</a>
-    <br />
-}
+<table border="1">
+    <tr>
+        <th>Less 10Mb</th>
+        <th>10Mb-50Mb</th>
+        <th>More 100Mb</th>
+        <th>Количество всех файлов в текущей папке и подпапках</th>
+    </tr>
+    <tr>
+        <td>@ViewBag.CountFiles10</td>
+        <td>@ViewBag.CountFiles1050</td>
+        <td>@ViewBag.CountFiles50</td>
+        <td>@ViewBag.CountFilesAll</td>
+    </tr>
+</table>
+
+<p style="font-size:20px; color:#ff0000;">@ViewBag.Message</p>
+
+@* Локольные диски----------------------------------------------------- *@
+<table>
+    <tr>
+    @foreach (var item in ViewBag.Disc)
+    {
+        <td><a href="/Home/QueryInformation?message=@item">@item</a></td>
+    }
+    </tr>
+</table>
+
+@* Папки -------------------------------------------------------------- *@
+<p>ПАПКИ: </p>
+<ul>
+    @foreach (var item in ViewBag.Folders)
+    {
+        <li><a href="/Home/QueryInformation?message=@item">@item</a></li>
+    }
+</ul>
+<hr />
+
+@* Файлы --------------------------------------------------------------- *@
+<p>ФАЙЛИ: </p>
+<ul>
+    @foreach (var item in ViewBag.Files)
+    {
+        <li>@item</li>
+    }
+</ul>
