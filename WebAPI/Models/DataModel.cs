@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    public class TestModel
+    public class DataModel
     {
         public string[] locDisc { get; set; }
         public string[] folders { get; set; }

@@ -14,27 +14,8 @@ namespace WebAPI.Controllers.WebAPI
 {
     public class DataController : ApiController
     {
-        TestModel model = new TestModel();
-
-        //возвращает все локальные диски
-        // GET api/name
-        //public IEnumerable<string> Get()
-        //{
-        //    //тест QueryString
-        //    var queryString = this.Request.GetQueryNameValuePairs();
-
-        //    //пытаемся взять все локальные диски
-        //    try
-        //    {
-        //        //загруска лок дисков
-        //        return Directory.GetLogicalDrives();
-        //    }
-        //    catch (Exception)//при неудаче
-        //    {
-        //        return null;
-        //    }
-        //}
-
+        DataModel model = new DataModel();
+        
         //возвращает папки и файлы
         public HttpResponseMessage Get()
         {
@@ -84,7 +65,7 @@ namespace WebAPI.Controllers.WebAPI
                 int count1050 = 0;
                 int count100 = 0;
 
-                //получем список путей к всем файлов
+                //получем список путей(полных имен) к всем файлов
                 var mapRout = Directory.GetFiles(id, ".", SearchOption.AllDirectories);
 
                 //в цикле стучимся к каждому файлу и взвешиваем его с учетом <10  >=10&&<=50  >100
