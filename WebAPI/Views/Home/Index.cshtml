@@ -7,40 +7,31 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <style type="text/css">
-        #namesContainer {
-            width: 300px;
-            float: left;
-        }
-
-        #formContainer {
-            float: left;
-            margin-top: 15px;
-        }
-
-        #receivedElement {
-            clear: both;
-        }
-    </style>
+    <title>Главная страница</title>
 </head>
 <body>
+    @*Обработчики элементов управленяи находястся в файле MyJavaScripts.js*@
+    
 
-    @*Обработчики элементов управленяи находястся в файле getName.js*@
-    <div id="namesContainer">
-        <ul id="names"></ul>
+    @* здесь для локальных дисков *@
+    <div id="container">
+        <table border="1">
+            <tr>
+                <th>Less 10Mb</th>
+                <th>10Mb-50Mb</th>
+                <th>More 100Mb</th>
+            </tr>
+            <tr id="table"></tr><!--для ячеек таблицы-->
+        </table>
+        <div id="locDisc"></div><!--для локальных дисков-->
+        <div id="folders"></div><!--для папок-->
+        <div id="files"></div><!--для файлов-->
     </div>
-
-    <div id="formContainer">
-        <div>
-            <input type="text" id="elementId" />
-            <button id="button">Получить имя</button>
-        </div>
-        <div id="receivedElement"></div>
-    </div>
-
+    
+    <a href='api/data/1'>a</a>
+    <a href='api/data?paramMy=C://123\hjk/nm,n/jljkl'>a</a>
+    @* подключение файлов в конце *@
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script src="~/Scripts/MyJavaScript.js"></script>
-
 </body>
 </html>
