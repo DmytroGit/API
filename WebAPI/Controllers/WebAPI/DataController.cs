@@ -14,34 +14,53 @@ namespace WebAPI.Controllers.WebAPI
 {
     public class DataController : ApiController
     {
+        TestModel model = new TestModel();
+
         //возвращает все локальные диски
         // GET api/name
-        public IEnumerable<string> Get()
-        {
-            //тест QueryString
-            var queryString = this.Request.GetQueryNameValuePairs();
-            
-            //загруска лок дисков
-            return Directory.GetLogicalDrives();
-        }
+        //public IEnumerable<string> Get()
+        //{
+        //    //тест QueryString
+        //    var queryString = this.Request.GetQueryNameValuePairs();
+
+        //    //пытаемся взять все локальные диски
+        //    try
+        //    {
+        //        //загруска лок дисков
+        //        return Directory.GetLogicalDrives();
+        //    }
+        //    catch (Exception)//при неудаче
+        //    {
+        //        return null;
+        //    }
+        //}
 
         //возвращает папки и файлы
-        public HttpResponseMessage Get(string id/*путь к папке*/)
+        public HttpResponseMessage Get()
         {
             var queryString = this.Request.GetQueryNameValuePairs();
+            string id = "";
 
-            TestModel model = new TestModel();
+            //проходимся по коллекции параметров и выбираем нужный - "paramPath"
+            foreach (var item in queryString)
+                if (item.Key == "paramPath")
+                    id = item.Value;
 
-            id = @"D:/Новая папка";
-
+            //пытаемся взять все локальные диски
+            try
+            {
+                //присвоение локальных дисков свойству переменной
+                model.locDisc = Directory.GetLogicalDrives();
+            }
+            catch (Exception)//при неудаче
+            {
+                model.locDisc = null;
+            }
             //пытаемся взять папки в текущей
             try
             {
-                //перечень папок в папке
-                var folders = Directory.GetDirectories(id);
-
                 //присвоение перечня папок к свойству объекта
-                model.folders = folders;
+                model.folders = Directory.GetDirectories(id);
             }
             catch (Exception)//если не получилось
             {
@@ -50,15 +69,11 @@ namespace WebAPI.Controllers.WebAPI
             //пытаемся взять файлы в текущей папке
             try
             {
-                //перечень файлов в папке
-                var files = Directory.GetFiles(id);
-
-                //присвоение перечня папок к свойству объекта
-                model.files = files;
+                //присвоение перечня файлов к свойству объекта
+                model.files = Directory.GetFiles(id);
             }
             catch (Exception)//если не получилось
             {
-                //присвоение перечня папок к свойству объекта
                 model.folders = null;
             }
 
@@ -98,6 +113,7 @@ namespace WebAPI.Controllers.WebAPI
             }
             catch (Exception)
             {
+                //так как поля есть тип которые могут быть null то при исключении присваиваем им null
                 model.count10 = null;
                 model.count1050 = null;
                 model.count100 = null;
