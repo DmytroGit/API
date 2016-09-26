@@ -14,5 +14,6 @@ namespace WebAPI.Models
         public int? count1050 { get; set; } 
         public int? count100 { get; set; }
         public string currentPath { get; set; }
+        public string parentFolder { get; set; }
     }
 }

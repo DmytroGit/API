@@ -27,6 +27,16 @@ namespace WebAPI.Controllers.WebAPI
                 if (item.Key == "paramPath")
                     currentPath = item.Value;
 
+            //берем родительский каталог для шага назад
+            try
+            {
+                model.parentFolder = Directory.GetParent(currentPath).ToString();
+            }
+            catch (Exception)
+            {
+                model.parentFolder = null;
+            }
+
             //присвоение текущей папки
             model.currentPath = currentPath;
 
