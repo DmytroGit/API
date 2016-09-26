@@ -20,12 +20,15 @@ namespace WebAPI.Controllers.WebAPI
         public HttpResponseMessage Get()
         {
             var queryString = this.Request.GetQueryNameValuePairs();
-            string id = "";
+            string currentPath = "";
 
             //проходимся по коллекции параметров и выбираем нужный - "paramPath"
             foreach (var item in queryString)
                 if (item.Key == "paramPath")
-                    id = item.Value;
+                    currentPath = item.Value;
+
+            //присвоение текущей папки
+            model.currentPath = currentPath;
 
             //пытаемся взять все локальные диски
             try
@@ -41,7 +44,7 @@ namespace WebAPI.Controllers.WebAPI
             try
             {
                 //присвоение перечня папок к свойству объекта
-                model.folders = Directory.GetDirectories(id);
+                model.folders = Directory.GetDirectories(currentPath);
             }
             catch (Exception)//если не получилось
             {
@@ -51,7 +54,7 @@ namespace WebAPI.Controllers.WebAPI
             try
             {
                 //присвоение перечня файлов к свойству объекта
-                model.files = Directory.GetFiles(id);
+                model.files = Directory.GetFiles(currentPath);
             }
             catch (Exception)//если не получилось
             {
@@ -66,7 +69,7 @@ namespace WebAPI.Controllers.WebAPI
                 int count100 = 0;
 
                 //получем список путей(полных имен) к всем файлов
-                var mapRout = Directory.GetFiles(id, ".", SearchOption.AllDirectories);
+                var mapRout = Directory.GetFiles(currentPath, ".", SearchOption.AllDirectories);
 
                 //в цикле стучимся к каждому файлу и взвешиваем его с учетом <10  >=10&&<=50  >100
                 for (int i = 0; i < mapRout.Length; i++)

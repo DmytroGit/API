@@ -13,5 +13,6 @@ namespace WebAPI.Models
         public int? count10 { get; set; }
         public int? count1050 { get; set; } 
         public int? count100 { get; set; }
+        public string currentPath { get; set; }
     }
 }
